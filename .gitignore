@@ -1,6 +1,31 @@
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
 
-train_results/
-eval_results/
-wandb/
-tmp/
+# Node
+node_modules/
+package-lock.json
+
+# Testing
+screenshots/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+/tmp/
+*.tmp
