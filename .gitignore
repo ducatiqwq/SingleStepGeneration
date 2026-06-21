@@ -1,0 +1,6 @@
+__pycache__/
+
+train_results/
+eval_results/
+wandb/
+tmp/
