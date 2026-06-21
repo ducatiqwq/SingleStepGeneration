@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single-Step Generation in Diffusion Models</title>
+    <meta name="description" content="Investigating single-step generation capability in pre-trained diffusion models.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>Single-Step Generation in Pre-trained Diffusion Models</h1>
+        <p class="authors">Guancheng Du, Si Li</p>
+        <p class="affiliation">Tsinghua University</p>
+        <div class="links">
+          <a href="https://github.com/ducatiqwq/SingleStepGeneration" class="btn">GitHub</a>
+          <a href="#paper" class="btn secondary">Paper</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="abstract">
+        <h2>Abstract</h2>
+        <p>
+          We investigate whether single-step generation capability is inherent in pre-trained diffusion models.
+          We identify that the primary weakness is the lack of high-frequency details (blurriness).
+          We propose a training-free timestep adjustment method and demonstrate that fast distillation using
+          perceptual loss can effectively mitigate blurriness with minimal computational cost.
+        </p>
+      </section>
+
+      <section class="key-results">
+        <h2>Key Results</h2>
+
+        <div class="result-grid">
+          <figure class="result-item">
+            <img src="assets/fig1-two-step.png" alt="Two-step generation">
+            <figcaption><strong>2-step:</strong> Satisfactory quality</figcaption>
+          </figure>
+          <figure class="result-item">
+            <img src="assets/fig2-one-step.png" alt="One-step generation">
+            <figcaption><strong>1-step (t₀=1.0):</strong> Blurry</figcaption>
+          </figure>
+          <figure class="result-item">
+            <img src="assets/fig3-lowered-timestep.png" alt="Lowered timestep">
+            <figcaption><strong>1-step (t₀=0.96):</strong> Less blurry, more artifacts</figcaption>
+          </figure>
+        </div>
+
+        <div class="insight">
+          <h3>Main Finding</h3>
+          <p>
+            Lowering the initial timestep t₀ from 1.0 to ~0.96 introduces high-frequency details but also artifacts.
+            This reveals a fundamental <strong>detail-artifact trade-off</strong> in single-step generation.
+          </p>
+        </div>
+
+        <figure class="full-width">
+          <img src="assets/fig5-lpips-curve.png" alt="LPIPS vs timestep">
+          <figcaption>LPIPS metric vs t₀: Intermediate values (~0.97) achieve best perceptual quality</figcaption>
+        </figure>
+      </section>
+
+      <section class="method">
+        <h2>Method</h2>
+
+        <div class="method-grid">
+          <div class="method-card">
+            <h3>Training-Free Adjustment</h3>
+            <p>Simply lower the initial timestep t₀ to inject high-frequency details without training.</p>
+          </div>
+
+          <div class="method-card">
+            <h3>Theoretical Insight</h3>
+            <p>High timesteps cause averaging (blurriness), while low timesteps suffer from distribution mismatch (artifacts).</p>
+          </div>
+
+          <div class="method-card">
+            <h3>LPIPS Distillation</h3>
+            <p>Distill from 3 steps to 1 step using perceptual loss at t₀=0.975 for sharp results.</p>
+          </div>
+        </div>
+
+        <figure class="theory-viz">
+          <div class="theory-grid">
+            <img src="assets/fig9-velocity-t02.png" alt="t=0.2">
+            <img src="assets/fig10-velocity-t06.png" alt="t=0.6">
+            <img src="assets/fig11-velocity-t10.png" alt="t=1.0">
+          </div>
+          <figcaption>Velocity fields at different timesteps: low t shows sharp separation, high t shows averaging</figcaption>
+        </figure>
+      </section>
+
+      <section class="citation">
+        <h2>Citation</h2>
+        <pre><code>@article{du2026single_step,
+  title={Are pre-trained diffusion models inherently capable of single-step generation?},
+  author={Du, Guancheng and Li, Si},
+  year={2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 Guancheng Du, Si Li | Tsinghua University</p>
+    </footer>
+  </body>
+</html>
