@@ -29,3 +29,6 @@ Thumbs.db
 # Temporary files
 /tmp/
 *.tmp
+
+# Large generated artifacts
+report.pdf
